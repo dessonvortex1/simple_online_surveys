@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Surveoo - Global Survey Rewards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    select, button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("https://ipapi.co/json/")
+        .then(res => res.json())
+        .then(data => {
+          const countryCode = data.country;
+          const ua = navigator.userAgent.toLowerCase();
+          let deviceType = "desktop";
+          if (/android/.test(ua)) deviceType = "android";
+          else if (/iphone|ipad|ipod/.test(ua)) deviceType = "ios";
+
+          const redirectLinks = {
+            AU: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=65660", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=68121", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=68119" },
+            CA: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=67685", ios: "#", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=65662" },
+            CN: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=63861", ios: "#", desktop: "#" },
+            DE: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=68865", desktop: "#" },
+            EG: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=67233", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=67231" },
+            FR: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=59612", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=59613", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=67694" },
+            ID: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=66540", desktop: "#" },
+            KE: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=65105", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=65106
+", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=65104
+" },
+            LT: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=67798", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=67799", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=67797" },
+            MA: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=67239", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=66640" },
+            MG: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=65260", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=65261", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=65259
+" },
+            NG: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=68117
+", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=68118", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=68116" },
+            NP: { android: "#", ios: "#", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=68890" },
+            PH: { android: "#", ios: "#", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=68890" },
+            PL: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=66543
+", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=66541" },
+            RO: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=60088", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=66544" },
+            RS: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=67906", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=59623" },
+            UK: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=65676", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=67700" },
+            US: { android: "https://trkfiles.com/show.php?l=0&u=1671034&id=67704
+", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=68853", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=68851
+" },
+            VN: { android: "#", ios: "https://trkfiles.com/show.php?l=0&u=1671034&id=66648
+", desktop: "https://trkfiles.com/show.php?l=0&u=1671034&id=66646" }
+            
+          };
+
+          const target = redirectLinks[countryCode]?.[deviceType];
+          if (target) {
+            window.location.href = target;
+          }
+        });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Start Earning with Surveoo</h1>
+    <p>Select your country and sign up to begin earning rewards from surveys.</p>
+    <select id="countrySelect">
+      <option value="">-- Select Your Country --</option>
+      <option value="LINK_AU">Australia</option>
+      <option value="LINK_CA">Canada</option>
+      <option value="LINK_CN">China</option>
+      <option value="LINK_DE">Germany</option>
+      <option value="LINK_EG">Egypt</option>
+      <option value="LINK_FR">France</option>
+      <option value="LINK_ID">Indonesia</option>
+      <option value="LINK_KE">Kenya</option>
+      <option value="LINK_LT">Lithuania</option>
+      <option value="LINK_MA">Morocco</option>
+      <option value="LINK_MG">Madagascar</option>
+      <option value="LINK_NG">Nigeria</option>
+      <option value="LINK_NP">Nepal</option>
+      <option value="LINK_PH">Philippines</option>
+      <option value="LINK_PL">Poland</option>
+      <option value="LINK_RO">Romania</option>
+      <option value="LINK_RS">Serbia</option>
+      <option value="LINK_UK">United Kingdom</option>
+      <option value="LINK_US">United States</option>
+      <option value="LINK_VN">Vietnam</option>
+    </select>
+    <button onclick="redirectToOffer()">Sign Up Now</button>
+    <div class="footer">
+      This offer is available worldwide. Choose your country to get started.
+    </div>
+  </div>
+  <script>
+    function redirectToOffer() {
+      const countryLinks = {
+        LINK_AU: "https://dessonvortex1.github.io/simple_online_surveys/AU.html",
+        LINK_CA: "https://dessonvortex1.github.io/simple_online_surveys/CA.html",
+        LINK_CN: "https://dessonvortex1.github.io/simple_online_surveys/CN.html",
+        LINK_DE: "https://dessonvortex1.github.io/simple_online_surveys/DE.html",
+        LINK_EG: "https://dessonvortex1.github.io/simple_online_surveys/EG.html",
+        LINK_FR: "https://dessonvortex1.github.io/simple_online_surveys/FR.html",
+        LINK_ID: "https://dessonvortex1.github.io/simple_online_surveys/ID.html",
+        LINK_KE: "https://dessonvortex1.github.io/simple_online_surveys/KE.html",
+        LINK_LT: "https://dessonvortex1.github.io/simple_online_surveys/LT.html",
+        LINK_MA: "https://dessonvortex1.github.io/simple_online_surveys/MA.html",
+        LINK_MG: "https://dessonvortex1.github.io/simple_online_surveys/MG.html",
+        LINK_NG: "https://dessonvortex1.github.io/simple_online_surveys/NG.html",
+        LINK_NP: "https://dessonvortex1.github.io/simple_online_surveys/PH.html",
+        LINK_PH: "https://dessonvortex1.github.io/simple_online_surveys/PH.html",
+        LINK_RO: "https://dessonvortex1.github.io/simple_online_surveys/RO.html",
+        LINK_RS: "https://dessonvortex1.github.io/simple_online_surveys/RS.html",
+        LINK_UK: "https://dessonvortex1.github.io/simple_online_surveys/UK.html",
+        LINK_US: "https://dessonvortex1.github.io/simple_online_surveys/US.html",
+        LINK_VN: "https://dessonvortex1.github.io/simple_online_surveys/VN.html"
+      };
+      const selected = document.getElementById("countrySelect").value;
+      if (selected && countryLinks[selected]) {
+        window.location.href = countryLinks[selected];
+      } else {
+        alert("Please select your country first.");
+      }
+    }
+  </script>
+</body>
+</html>
